@@ -1,0 +1,8 @@
+---
+title: "0. Installing R, RStudio, and Github"
+format: html
+---
+
+# Welcome!
+
+I, Mitchell, will be placing a in-text version of the "Installing R, RStudio, and Github" video lesson here. Later!
