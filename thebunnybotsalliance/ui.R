@@ -1,33 +1,26 @@
-#
-# This is the user-interface definition of a Shiny web application. You can
-# run the application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    https://shiny.posit.co/
-#
-
-library(shiny)
-
-# Define UI for application that draws a histogram
-fluidPage(
-
-    # Application title
-    titlePanel("Old Faithful Geyser Data"),
-
-    # Sidebar with a slider input for number of bins
-    sidebarLayout(
-        sidebarPanel(
-            sliderInput("bins",
-                        "Number of bins:",
-                        min = 1,
-                        max = 50,
-                        value = 30)
+navbarPage(
+    title = "The Bunnybots Alliance: Harvest Havoc 2026",
+    theme = bs_theme(version = 5, preset = "flatly"),
+    collapsible = TRUE,
+    tabPanel(
+        title = "Results",
+        div(
+            card_header("Qualification Results"),
+            DTOutput("matches_table")
         ),
-
-        # Show a plot of the generated distribution
-        mainPanel(
-            plotOutput("distPlot")
+        div(
+            card_header("Playoff Results"),
+            DTOutput("playoffs_table")
         )
+    ),
+    tabPanel(
+        title = "Rankings",
+        card(
+            DTOutput("rankings_table")
+            )
+    ),
+    tabPanel(
+        title = "Scouting",
+        
     )
 )
