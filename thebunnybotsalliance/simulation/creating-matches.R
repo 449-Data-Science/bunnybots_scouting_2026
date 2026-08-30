@@ -184,4 +184,12 @@ result <- result |>
             (minor_red) * 4 + (major_red) * 8,
     )
 
+matches <- result |>
+    rename(
+        match_number = match,
+        red1 = R1, red2 = R2, red3 = R3,
+        blue1 = B1, blue2 = B2, blue3 = B3
+        )
+
+write.csv(matches, "thebunnybotsalliance/data/matches.csv")
 save(result, file = "thebunnybotsalliance/simulation/data/matches.rda")
