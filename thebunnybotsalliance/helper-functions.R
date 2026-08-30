@@ -32,8 +32,8 @@ process_rankings <- function(raw) {
             string = paste0(wins, "-", losses, "-", ties)
             ) |>
         select(
-            rank, team_key, `Ranking Score`, `Avg Match`, `Avg Auto Fuel`,
-            `Avg Tower`, string, dq, matches_played, `Ranking Total`
+            rank, team_key, `Ranking Score`, `Avg Match`, string, 
+            dq, matches_played, `Ranking Total`
         ) |>
         rename(
             Rank = rank, Team = team_key, `Record (W-L-T)` = string, 

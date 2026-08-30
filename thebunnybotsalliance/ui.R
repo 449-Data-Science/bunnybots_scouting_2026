@@ -2,6 +2,10 @@ navbarPage(
     title = "The Bunnybots Alliance: Harvest Havoc 2026",
     theme = bs_theme(version = 5, preset = "flatly"),
     collapsible = TRUE,
+    header = tagList(
+        tags$link(rel = "stylesheet", type = "text/css", href = "assets/styles.css"),
+        tags$head(tags$script(src = "assets/script.js", type = "text/javascript")),
+    ),
     tabPanel(
         title = "Results",
         div(
