@@ -68,7 +68,7 @@ rankings$average_match = round(
 
 rankings <- rankings |>
     mutate(average_rp = round(rp / plays, 2)) |>
-    arrange(desc(rp))
+    arrange(desc(average_rp))
 
 rankings$rank <- 1:length(rankings$team)
 
