@@ -16,75 +16,59 @@
     .card-body * { font-size: 25px !important; }
     .card-header * { font-size: 25px !important; }
     .shiny-html-output { font-size: 25px !important; }
-    #intro_paragraph, #event_summary_summary, #compare_teams_summary,
-    #match_tab_summary, #scouts_tab_summary, #settings_summary,
-    #pridge_summary, #metric_swap_summary, #event_swap_summary,
-    #password_summary { font-size: 25px !important; }
     
-    #intro_paragraph *, #event_summary_summary *, #compare_teams_summary *,
-    #match_tab_summary *, #scouts_tab_summary *, #settings_summary *,
-    #pridge_summary *, #metric_swap_summary *, #event_swap_summary *,
-    #password_summary * { font-size: 25px !important; }
-    
-    #intro_paragraph b, #event_summary_summary b, #compare_teams_summary b,
-    #match_tab_summary b, #scouts_tab_summary b, #settings_summary b,
-    #pridge_summary b, #metric_swap_summary b, #event_swap_summary b,
-    #password_summary b { font-size: 25px !important; }
-    
-    #intro_paragraph a, #event_summary_summary a, #compare_teams_summary a,
-    #match_tab_summary a, #scouts_tab_summary a, #settings_summary a,
-    #pridge_summary a, #metric_swap_summary a, #event_swap_summary a,
-    #password_summary a { font-size: 25px !important; }
+    .results-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
 
-/* VIRTUAL SELECT PICKERS CSS */
-.vscomp-toggle-button {
-    font-size: 100px !important;
-    height: 100px !important;
-    padding: 25px !important;
-}
-.vscomp-option-text { 
-    font-size: 30px !important; 
-}
-.vscomp-option { 
-    font-size: 22px !important; 
-    padding: 14px !important; 
-    min-height: 50px !important; 
-    box-sizing: border-box !important;
-    height: auto !important; 
-    max-height: 55vh !important;
-}
-.vscomp-search-input { 
-    font-size: 20px !important; 
-    padding: 10px !important; 
-}
-.vscomp-no-options { 
-    font-size: 20px !important; 
-}
-.vscomp-value-tag { 
-    font-size: 18px !important; 
-    padding: 4px 8px !important; 
-}
-.vscomp-toggle-button .vscomp-value { 
-    font-size: 20px !important; 
-}
-.vscomp-dropbox-container-bottom {
-    display: none !important;
-}
-.vscomp-dropbox { 
-    height: 100%px !important;
+    .qualification-card,
+    .alliances-card,
+    .playoffs-card {
+        width: 100%;
+    }
+
 }
 
-/* SCORE PREDICTION CSS */
+@media (min-width: 992px) {
+    /* Results page layout */
+    .results-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+        gap: 1rem;
+    
+        width: 100%;
+    }
+    
+    /* Qualification matches occupy the entire left side */
+    .qualification-card {
+        grid-column: 1;
+        grid-row: 1 / 3;
+    }
+    
+    /* Alliances occupy the upper-right */
+    .alliances-card {
+        grid-column: 2;
+        grid-row: 1;
+    }
+    
+    /* Playoffs occupy the lower-right */
+    .playoffs-card {
+        grid-column: 2;
+        grid-row: 2;
+    }
+}
 
-#score_prediction { 
-    font-size: 30px !important; 
+.dataTable thead th {
+    font-size: 12px !important;
 }
-#score_prediction * { 
-    font-size: 30px !important; 
+
+.dataTable tbody td {
+    font-size: 14px !important;
 }
-#score_prediction span { 
-    font-size: 30px !important; 
-}
+
 .shiny-spinner-output-container {
     min-height: 875px !important;
 }

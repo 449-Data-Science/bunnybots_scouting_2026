@@ -1,34 +1,96 @@
 function resizeFrame() {
-    if (window.frameElement) {
-        var activeTab = document.querySelector('.tab-pane.active');
-        var navbar = document.querySelector('.navbar');
-        var navHeight = navbar ? navbar.offsetHeight : 0;
-        var h = activeTab ? activeTab.scrollHeight + navHeight + 20
-        : document.body.scrollHeight;
-        
-        window.frameElement.style.height = h + 'px';
-        window.frameElement.style.overflow = 'hidden';
+
+    var frame = window.frameElement;
+
+    if (!frame) {
+        console.log("No iframe detected");
+        return;
     }
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
+
+    var activeTab = document.querySelector('.tab-pane.active');
+
+    var navbar = document.querySelector('.navbar');
+    var navHeight = navbar ? navbar.offsetHeight : 0;
+
+    var contentHeight;
+
+    if (activeTab) {
+        contentHeight = activeTab.getBoundingClientRect().height;
+
+        // Include overflowing content
+        contentHeight = Math.max(
+            contentHeight,
+            activeTab.scrollHeight,
+            activeTab.offsetHeight
+        );
+    } else {
+        contentHeight = document.documentElement.scrollHeight;
+    }
+
+    var height = Math.ceil(contentHeight + navHeight + 30);
+
+    console.log(
+        "Resizing iframe:",
+        height,
+        "px | tab:",
+        activeTab
+    );
+
+    frame.style.height = height + "px";
+    frame.style.minHeight = height + "px";
+    frame.style.overflow = "hidden";
+
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
 }
 
-// On tab click
-document.addEventListener('click', function(e) {
-    var tab = e.target.closest('a[data-bs-toggle=\"tab\"], a[data-toggle=\"tab\"]');
+
+/* ---------------------------------------------------------
+   INITIAL LOAD
+--------------------------------------------------------- */
+
+window.addEventListener("load", function() {
+    setTimeout(resizeFrame, 500);
+    setTimeout(resizeFrame, 1500);
+    setTimeout(resizeFrame, 3000);
+});
+
+
+/* ---------------------------------------------------------
+   TAB CHANGES
+--------------------------------------------------------- */
+
+document.addEventListener("click", function(e) {
+
+    var tab = e.target.closest(
+        'a[data-bs-toggle="tab"], a[data-toggle="tab"]'
+    );
+
     if (tab) {
-        setTimeout(resizeFrame, 400);
+        setTimeout(resizeFrame, 100);
+        setTimeout(resizeFrame, 500);
+        setTimeout(resizeFrame, 1500);
     }
 });
 
-// When any Shiny output finishes rendering, resize
-$(document).on('shiny:value shiny:outputinvalidated', function() {
-    setTimeout(resizeFrame, 300);
-});
 
-// Watch for image/plot loads specifically
-$(document).on('shiny:idle', function() {
-    setTimeout(resizeFrame, 300);
-});
+/* ---------------------------------------------------------
+   SHINY OUTPUTS
+--------------------------------------------------------- */
 
-setTimeout(resizeFrame, 2000);
+$(document).on(
+    "shiny:value shiny:outputinvalidated",
+    function() {
+        setTimeout(resizeFrame, 200);
+        setTimeout(resizeFrame, 1000);
+    }
+);
+
+
+/* ---------------------------------------------------------
+   SHINY IDLE
+--------------------------------------------------------- */
+
+$(document).on("shiny:idle", function() {
+    setTimeout(resizeFrame, 500);
+});
