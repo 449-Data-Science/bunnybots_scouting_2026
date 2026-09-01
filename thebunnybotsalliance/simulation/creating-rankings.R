@@ -79,5 +79,5 @@ rankings <- rankings |>
         `Avg Match` = average_match, `Ranking Total` = rp
     )
 
-write.csv(rankings, "thebunnybotsalliance/data/rankings.csv")
+write.csv(rankings, "thebunnybotsalliance/data/rankings.csv", row.names = FALSE)
 save(rankings, file = "thebunnybotsalliance/simulation/data/rankings.rda")

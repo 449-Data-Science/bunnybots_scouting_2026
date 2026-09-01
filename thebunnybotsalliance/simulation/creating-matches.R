@@ -191,5 +191,5 @@ matches <- result |>
         blue1 = B1, blue2 = B2, blue3 = B3
         )
 
-write.csv(matches, "thebunnybotsalliance/data/matches.csv")
+write.csv(matches, "thebunnybotsalliance/data/matches.csv", row.names = FALSE)
 save(result, file = "thebunnybotsalliance/simulation/data/matches.rda")

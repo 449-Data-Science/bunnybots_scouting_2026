@@ -346,5 +346,5 @@ while (red_wins < 2 && blue_wins < 2) {
 playoffs <- matches
 save(playoffs, file = "thebunnybotsalliance/simulation/data/playoffs.rda")
 save(alliances, file = "thebunnybotsalliance/simulation/data/alliances.rda")
-write.csv(playoffs, "thebunnybotsalliance/data/playoffs.csv")
-write.csv(playoffs, "thebunnybotsalliance/data/alliances.csv")
+write.csv(playoffs, "thebunnybotsalliance/data/playoffs.csv", row.names = FALSE)
+write.csv(alliances, "thebunnybotsalliance/data/alliances.csv", row.names = FALSE)

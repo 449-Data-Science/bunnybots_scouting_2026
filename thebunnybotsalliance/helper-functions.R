@@ -61,7 +61,7 @@ process_playoffs <- function(raw) {
         )
     
     num_finals <- length(raw$blue1) - 13
-    string <- c(paste("Playoff Match", 1:13), paste("Finals", 1:num_finals))
+    string <- c(paste("Playoff ", 1:13), paste("Finals", 1:num_finals))
     data$Match <- string
     data <- data |>
         select(Match, everything())
