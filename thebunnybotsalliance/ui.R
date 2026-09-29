@@ -4,7 +4,7 @@ navbarPage(
     collapsible = TRUE,
     header = tagList(
         tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"),
-        #tags$head(tags$script(src = "script.js", type = "text/javascript")),
+        tags$head(tags$script(src = "script.js", type = "text/javascript")),
     ),
     tabPanel(
         title = "Results",

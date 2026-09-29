@@ -1,33 +1,55 @@
 function(input, output, session) {
-    #matches_data <- reactivePoll(
-    #    intervalMillis = POLL_INTERVAL,
-    #    session = session,
-    #    checkFunc = function() {
-    #        Sys.time()
-    #    },
-    #    valueFunc = function() {
-    #        get_matches("qualification")
-    #    }
-    #)
+    qual_matches_raw <- reactivePoll(
+        intervalMillis = POLL_INTERVAL, session = session,
+        checkFunc = function() { Sys.time() },
+        valueFunc = function() { get_matches("qualification") }
+    )
     
-    #rankings_data <- reactivePoll(
-    #    intervalMillis = POLL_INTERVAL,
-    #    session = session,
-    #    checkFunc = function() Sys.time(),
-    #    valueFunc = function() get_rankings()
-    #)
+    elim_matches_raw <- reactivePoll(
+        intervalMillis = POLL_INTERVAL, session = session,
+        checkFunc = function() { Sys.time() },
+        valueFunc = function() { get_matches("playoff") }
+    )
+    
+    qual_schedule_raw <- reactivePoll(
+        intervalMillis = POLL_INTERVAL, session = session,
+        checkFunc = function() { Sys.time() },
+        valueFunc = function() { get_schedule("qualification") }
+    )
+    
+    elim_schedule_raw <- reactivePoll(
+        intervalMillis = POLL_INTERVAL, session = session,
+        checkFunc = function() { Sys.time() },
+        valueFunc = function() { get_schedule("playoff") }
+    )
+    
+    rankings_raw <- reactivePoll(
+        intervalMillis = POLL_INTERVAL, session = session,
+        checkFunc = function() { Sys.time() },
+        valueFunc = function() { get_rankings() }
+    )
+    
+    alliances_raw <- reactivePoll(
+        intervalMillis = POLL_INTERVAL,
+        session = session,
+        checkFunc = function() Sys.time(),
+        valueFunc = function() get_alliances()
+    )
     
     matches_raw <- reactiveVal(read_csv("data/matches.csv"))
     rankings_raw <- reactiveVal(read_csv("data/rankings.csv"))
     playoffs_raw <- reactiveVal(read_csv("data/playoffs.csv"))
     alliances_raw <- reactiveVal(read_csv("data/alliances.csv"))
+    #qual_schedule_raw <- reactiveVal(read_csv("data/qual_schedule.csv"))
+    #elim_schedule_raw <- reactiveVal(read_csv("data/elim_schedule.csv"))
+    
 
     matches_data <- reactiveVal()
     rankings_data <- reactiveVal()
     playoffs_data <- reactiveVal()
 
     observe({
-        matches_data(process_matches(matches_raw()))
+        matches_data(process_matches(matches_raw(), qual_schedule_raw()))
         rankings_data(process_rankings(rankings_raw()))
         playoffs_data(process_playoffs(playoffs_raw()))
     })

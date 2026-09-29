@@ -1,6 +1,6 @@
 library(tidyverse)
 
-process_matches <- function(raw) {
+process_matches <- function(raw, schedule) {
     data <- raw |>
         select(
             match_number, 
@@ -8,6 +8,7 @@ process_matches <- function(raw) {
             blue1, blue2, blue3, 
             red_score, blue_score
         ) |>
+        filter(match_number < 10) |>
         mutate(
             across(
                 c(blue1, blue2, blue3, red1, red2, red3),
@@ -20,6 +21,22 @@ process_matches <- function(raw) {
             `Blue 1` = blue1, `Blue 2` = blue2, `Blue 3` = blue3,
             `Red Score` = red_score, `Blue Score` = blue_score
         )
+    
+    max_qual <- max(data$Match)
+    schedule <- schedule |>
+        filter(match > max_qual) |>
+        rename(
+            Match = match, 
+            `Red 1` = R1, `Red 2` = R2, `Red 3` = R3,
+            `Blue 1` = B1, `Blue 2` = B2, `Blue 3` = B3
+        ) |>
+        mutate(
+            `Red Score` = NA,
+            `Blue Score` = NA
+        )
+    
+    data <- data |>
+        rbind(schedule)
     
     return(data)
 }
