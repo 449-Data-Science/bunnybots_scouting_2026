@@ -1,0 +1,16 @@
+---
+title: "temp"
+format: html
+---
+
+```{r}
+iris <- iris
+names(iris)
+
+a <- combn(1:4, 3, simplify = FALSE)
+for (list in combn(1:4, 2, simplify = FALSE)) {
+    temp <- iris[list]
+    print(temp)
+}
+cor(iris$Petal.Width, iris$Sepal.Width)
+```
