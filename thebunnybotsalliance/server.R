@@ -40,9 +40,8 @@ function(input, output, session) {
     rankings_raw <- reactiveVal(read_csv("data/rankings.csv"))
     playoffs_raw <- reactiveVal(read_csv("data/playoffs.csv"))
     alliances_raw <- reactiveVal(read_csv("data/alliances.csv"))
-    #qual_schedule_raw <- reactiveVal(read_csv("data/qual_schedule.csv"))
+    qual_schedule_raw <- reactiveVal(read_csv("data/qual_schedule.csv"))
     #elim_schedule_raw <- reactiveVal(read_csv("data/elim_schedule.csv"))
-    
 
     matches_data <- reactiveVal()
     rankings_data <- reactiveVal()

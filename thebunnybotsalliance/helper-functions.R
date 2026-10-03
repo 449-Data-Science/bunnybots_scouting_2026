@@ -8,7 +8,7 @@ process_matches <- function(raw, schedule) {
             blue1, blue2, blue3, 
             red_score, blue_score
         ) |>
-        filter(match_number < 10) |>
+        #filter(match_number < 10) |>
         mutate(
             across(
                 c(blue1, blue2, blue3, red1, red2, red3),
