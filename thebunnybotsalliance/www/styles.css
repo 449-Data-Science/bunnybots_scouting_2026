@@ -1,51 +1,10 @@
-@media (max-width: 991px) {
-
-    /* ---- BODY & BASE TEXT ---- */
-    body { font-size: 15px !important; line-height: 1.5 !important; }
-    p, li, span, label { font-size: 20px !important; }
-    
-    /* ---- NAVBAR ---- */
-    .navbar-brand { font-size: 24px !important; }
-    .navbar-nav .nav-link { font-size: 20px !important; padding: 12px 16px !important; }
-    .navbar-toggler { padding: 10px !important; }
-    
-    /* ---- CARDS ---- */
-    .card-header { font-size: 26px !important; padding: 14px !important; }
-    .card-body { padding: 16px !important; }
-    .graph-card { height: 1000px; }
-    .card-body * { font-size: 25px !important; }
-    .card-header * { font-size: 25px !important; }
-    .shiny-html-output { font-size: 25px !important; }
-    
-    .results-grid {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    .qualification-card,
-    .results-side,
-    .alliances-card,
-    .playoffs-card {
-        width: 100%;
-    }
-    
-    .results-side {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-}
-
 @media (min-width: 992px) {
     /* Results page layout: quals on the left, alliances over playoffs on the right */
     .results-grid {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: 1fr 1fr;
         gap: 1rem;
         width: 100%;
-        min-width: 0;
     }
     
     .results-side {
@@ -180,13 +139,58 @@ td.blue-cell .rp.on { background: var(--blue); }
 .rp-legend .rp.on { color: #fff; background: var(--ink); border: 1px solid var(--ink); }
 .rp-legend-note { margin-left: 8px; }
 
+/* Navbar title: full text normally, short text on phones */
+.brand-short { display: none; }
+
+/* =========================================================
+   TABLETS AND PHONES (all mobile rules live here, last in the file)
+========================================================= */
 @media (max-width: 991px) {
-    table.tba-table .rp-stack .rp { width: 15px; height: 12px; font-size: 9px !important; line-height: 11px; }
+    body { font-size: 15px; line-height: 1.4; }
+
+    /* Navbar */
+    .navbar .navbar-brand { font-size: 21px; white-space: normal; line-height: 1.1; margin-right: 8px; }
+    .navbar .nav-link { font-size: 17px; padding: 10px 14px; }
+    .navbar-toggler { padding: 6px 10px; }
+
+    /* Page and cards */
+    .container-fluid { padding-left: 10px; padding-right: 10px; }
+    .tab-content { padding-top: 0.75rem; }
+    .card-header { font-size: 19px; padding: 10px 12px; }
+    .card-body { padding: 8px; }
+
+    /* Results page stacks into one column */
+    .results-grid, .results-side { display: flex; flex-direction: column; gap: 1rem; width: 100%; }
+    .qualification-card, .alliances-card, .playoffs-card { width: 100%; }
+
+    /* Search box under the card title */
     .card-header-search { align-items: stretch; }
     .table-search { flex: 1 1 100%; }
-    .table-search input { font-size: 18px !important; padding: 8px 12px; }
-    .rp-legend .rp { width: 18px; height: 18px; font-size: 11px !important; line-height: 16px; }
-    table.tba-table thead th { font-size: 15px !important; }
-    table.tba-table tbody td { font-size: 17px !important; padding: 9px 12px; }
-    table.match-table tbody td { padding-top: 3px; padding-bottom: 3px; height: 44px; }
+    .table-search input { font-size: 16px; padding: 6px 10px; }  /* 16px stops iOS zooming in */
+
+    /* Tables */
+    table.tba-table thead th { font-size: 12px !important; padding: 6px; }
+    table.tba-table tbody td { font-size: 13.5px !important; padding: 6px; }
+    table.match-table tbody td { padding-top: 2px; padding-bottom: 2px; height: 38px; }
+    table.tba-table .rp-stack .rp { width: 12px; height: 10px; font-size: 7.5px !important; line-height: 9px; }
+    .rp-legend { font-size: 12.5px; }
+    .rp-legend .rp { width: 16px; height: 16px; font-size: 10px !important; line-height: 14px; }
+}
+
+/* Phones (iPhone 11-17 are 375-440px wide): squeeze the 9-column match tables to fit */
+@media (max-width: 575px) {
+    .brand-full { display: none; }
+    .brand-short { display: inline; }
+    .navbar .navbar-brand { font-size: 22px; }
+
+    .container-fluid { padding-left: 6px; padding-right: 6px; }
+    .card-body { padding: 4px; }
+    .card-header { font-size: 18px; }
+
+    table.tba-table thead th { font-size: 10.5px !important; padding: 4px 2px; }
+    table.tba-table tbody td { font-size: 12px !important; padding: 4px 2px; }
+    table.match-table tbody td { padding-top: 2px; padding-bottom: 2px; height: 34px; }
+    table.tba-table td.match-cell { padding-left: 6px; }
+    .score-cell { gap: 3px; }
+    table.tba-table .rp-stack .rp { width: 10px; height: 9px; font-size: 6.5px !important; line-height: 8px; }
 }

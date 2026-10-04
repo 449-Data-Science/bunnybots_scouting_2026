@@ -1,5 +1,8 @@
 navbarPage(
-    title = "The Bunnybots Alliance: Harvest Havoc 2026",
+    title = tagList(
+        span(class = "brand-full", "The Bunnybots Alliance: Harvest Havoc 2026"),
+        span(class = "brand-short", "The Bunnybots Alliance")
+    ),
     theme = bs_theme(
         version = 5, preset = "flatly",
         primary = "#17222d", secondary = "#f0731d",
