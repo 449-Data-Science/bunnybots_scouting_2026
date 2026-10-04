@@ -1,14 +1,23 @@
 library(tidyverse)
 
+rp_map <- c(
+    `Red Stocked RP`  = "stocked_rp_red",
+    `Red Baked RP`    = "baked_rp_red",
+    `Red Dinner RP`   = "dinner_rp_red",
+    `Blue Stocked RP` = "stocked_rp_blue",
+    `Blue Baked RP`   = "baked_rp_blue",
+    `Blue Dinner RP`  = "dinner_rp_blue"
+)
+
 process_matches <- function(raw, schedule) {
     data <- raw |>
         select(
             match_number, 
             red1, red2, red3, 
             blue1, blue2, blue3, 
-            red_score, blue_score
+            red_score, blue_score,
+            all_of(unname(rp_map))
         ) |>
-        #filter(match_number < 10) |>
         mutate(
             across(
                 c(blue1, blue2, blue3, red1, red2, red3),
@@ -19,7 +28,8 @@ process_matches <- function(raw, schedule) {
             Match = match_number, 
             `Red 1` = red1, `Red 2` = red2, `Red 3` = red3,
             `Blue 1` = blue1, `Blue 2` = blue2, `Blue 3` = blue3,
-            `Red Score` = red_score, `Blue Score` = blue_score
+            `Red Score` = red_score, `Blue Score` = blue_score,
+            all_of(rp_map)
         )
     
     max_qual <- max(data$Match)
@@ -34,6 +44,7 @@ process_matches <- function(raw, schedule) {
             `Red Score` = NA,
             `Blue Score` = NA
         )
+    schedule[names(rp_map)] <- NA
     
     data <- data |>
         rbind(schedule)
@@ -76,6 +87,8 @@ process_playoffs <- function(raw) {
             `Blue 1` = blue1, `Blue 2` = blue2, `Blue 3` = blue3,
             `Red Score` = red_score, `Blue Score` = blue_score
         )
+    
+    data[names(rp_map)] <- NA
     
     num_finals <- length(raw$blue1) - 13
     string <- c(paste("Playoff ", 1:13), paste("Finals", 1:num_finals))

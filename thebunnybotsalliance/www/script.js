@@ -94,3 +94,26 @@ $(document).on(
 $(document).on("shiny:idle", function() {
     setTimeout(resizeFrame, 500);
 });
+
+
+/* ---------------------------------------------------------
+   TABLE SEARCH BOXES
+   Each .table-search div names its table in data-target.
+--------------------------------------------------------- */
+
+$(document).on("input", ".table-search input", function() {
+
+    var tableId = $(this).closest(".table-search").data("target");
+    var value = this.value;
+
+    var $table = $("#" + tableId).find("table.dataTable").filter(function() {
+        return $.fn.dataTable.isDataTable(this);
+    });
+
+    if ($table.length) {
+        $table.DataTable().search(value).draw();
+        // Fewer or more rows changes the page height, so resize the iframe
+        setTimeout(resizeFrame, 100);
+        setTimeout(resizeFrame, 500);
+    }
+});

@@ -42,11 +42,11 @@ function(input, output, session) {
     alliances_raw <- reactiveVal(read_csv("data/alliances.csv"))
     qual_schedule_raw <- reactiveVal(read_csv("data/qual_schedule.csv"))
     #elim_schedule_raw <- reactiveVal(read_csv("data/elim_schedule.csv"))
-
+    
     matches_data <- reactiveVal()
     rankings_data <- reactiveVal()
     playoffs_data <- reactiveVal()
-
+    
     observe({
         matches_data(process_matches(matches_raw(), qual_schedule_raw()))
         rankings_data(process_rankings(rankings_raw()))
@@ -58,41 +58,50 @@ function(input, output, session) {
         updateVirtualSelect("selected_team", choices = unique_teams)
     })
     
+    # ---- Search boxes ----
+    # Filtering happens in the browser (www/script.js). This reads the current
+    # search text without triggering a redraw, so a table that refreshes with
+    # new data keeps its filter.
+    query_of <- function(id) {
+        value <- isolate(input[[id]])
+        if (is.null(value)) "" else value
+    }
+    
     output$matches_table  <- renderDT({
-        dataframe <- matches_data()
-        datatable(dataframe, options = list(pageLength = nrow(dataframe)))
+        match_table(matches_data(), query = query_of("matches_q"))
     })
     
     output$playoffs_table <- renderDT({
-        dataframe <- playoffs_data()
-        datatable(dataframe, options = list(pageLength = nrow(dataframe)))
+        match_table(playoffs_data())
     })
     
     output$alliances_table <- renderDT({
         dataframe <- alliances_raw()
-        datatable(dataframe, options = list(pageLength = nrow(dataframe)))
+        # Same headers whether the data comes from the simulation or the API
+        names(dataframe) <- tools::toTitleCase(gsub("_", " ", names(dataframe)))
+        simple_table(dataframe)
     })
     
     output$rankings_table <- renderDT({
-        dataframe <- rankings_data()
-        datatable(dataframe, options = list(pageLength = nrow(dataframe)))
+        rankings_table(rankings_data(), query = query_of("rankings_q"))
     })
     
     output$detailed_table  <- renderDT({
         dataframe <- rbind(matches_raw(), playoffs_raw() |> select(!match_string))
-        datatable(dataframe, options = list(pageLength = nrow(dataframe)))
+        simple_table(dataframe, query = query_of("detailed_q"))
     })
     
     output$team_table <- renderDT({
+        req(input$selected_team)
         team <- as.character(input$selected_team)
         
         dataframe <- rbind(matches_data(), playoffs_data()) |>
             filter(
                 `Red 1` == team | `Red 2` == team | `Red 3` == team |
-                `Blue 1` == team | `Blue 2` == team | `Blue 3` == team
-                )
+                    `Blue 1` == team | `Blue 2` == team | `Blue 3` == team
+            )
         
-        datatable(dataframe, options = list(pageLength = nrow(dataframe)))
+        match_table(dataframe, highlight = team)
     })
     
     output$download_qual_matches <- downloadHandler(
@@ -102,7 +111,12 @@ function(input, output, session) {
     
     output$download_playoffs <- downloadHandler(
         filename = function() { "playoffs.csv" },
-        content = function(file) { write.csv(playoffs_data(), file, row.names = FALSE) }
+        content = function(file) { 
+            write.csv(
+                playoffs_data() |> select(!ends_with(" RP")), 
+                file, row.names = FALSE
+                ) 
+            }
     )
     
     output$download_rankings <- downloadHandler(

@@ -9,5 +9,6 @@ library(ggplot2)
 
 source("api-interface.R")
 source("helper-functions.R")
+source("table-helpers.R")
 
 POLL_INTERVAL <- 5000
