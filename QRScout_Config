@@ -1,0 +1,374 @@
+{
+  "title": "QRScout",
+  "page_title": "Harvest Havoc",
+  "delimiter": "\t",
+  "teamNumber": 449,
+  "floatingField": {
+    "show": false,
+    "codeValue": "teamNumber"
+  },
+  "theme": {
+    "light": {
+      "background": "0 0% 100%",
+      "foreground": "0 0% 3.9%",
+      "card": "0 0% 100%",
+      "card_foreground": "0 0% 3.9%",
+      "popover": "0 0% 100%",
+      "popover_foreground": "0 0% 3.9%",
+      "primary": "354.44 71.3% 47.9%",
+      "primary_foreground": "0 85.7% 97.3%",
+      "secondary": "0 0% 96.1%",
+      "secondary_foreground": "0 0% 9%",
+      "muted": "0 0% 96.1%",
+      "muted_foreground": "0 0% 45.1%",
+      "accent": "0 0% 96.1%",
+      "accent_foreground": "0 0% 9%",
+      "destructive": "0 84.2% 60.2%",
+      "destructive_foreground": "0 0% 98%",
+      "border": "0 0% 89.8%",
+      "input": "0 0% 89.8%",
+      "ring": "354.44 71.3% 47.9%",
+      "chart_1": "12 76% 61%",
+      "chart_2": "173 58% 39%",
+      "chart_3": "197 37% 24%",
+      "chart_4": "43 74% 66%",
+      "chart_5": "27 87% 67%"
+    },
+    "dark": {
+      "background": "0 0% 3.9%",
+      "foreground": "0 0% 98%",
+      "card": "0 0% 3.9%",
+      "card_foreground": "0 0% 98%",
+      "popover": "0 0% 3.9%",
+      "popover_foreground": "0 0% 98%",
+      "primary": "354.44 71.3% 47.9%",
+      "primary_foreground": "0 85.7% 97.3%",
+      "secondary": "0 0% 14.9%",
+      "secondary_foreground": "0 0% 98%",
+      "muted": "0 0% 14.9%",
+      "muted_foreground": "0 0% 63.9%",
+      "accent": "0 0% 14.9%",
+      "accent_foreground": "0 0% 98%",
+      "destructive": "0 62.8% 30.6%",
+      "destructive_foreground": "0 0% 98%",
+      "border": "0 0% 14.9%",
+      "input": "0 0% 14.9%",
+      "ring": "354.44 71.3% 47.9%",
+      "chart_1": "220 70% 50%",
+      "chart_2": "160 60% 45%",
+      "chart_3": "30 80% 55%",
+      "chart_4": "280 65% 60%",
+      "chart_5": "340 75% 55%"
+    }
+  },
+  "sections": [
+    {
+      "name": "Prematch + Auto",
+      "fields": [
+        {
+          "title": "Scouter Initials",
+          "description": "Enter the initials of the scouter.",
+          "type": "text",
+          "required": true,
+          "code": "scouter",
+          "formResetBehavior": "preserve",
+          "defaultValue": "NS"
+        },
+        {
+          "title": "Match Number",
+          "description": "Enter the match number.",
+          "type": "number",
+          "required": true,
+          "code": "matchNumber",
+          "formResetBehavior": "increment",
+          "defaultValue": 1
+        },
+        {
+          "title": "Robot",
+          "description": "The robot you are scouting this match, based on driver station position.",
+          "type": "select",
+          "required": true,
+          "code": "robot",
+          "formResetBehavior": "preserve",
+          "defaultValue": "R1",
+          "choices": {
+            "R1": "Red 1",
+            "R2": "Red 2",
+            "R3": "Red 3",
+            "B1": "Blue 1",
+            "B2": "Blue 2",
+            "B3": "Blue 3"
+          }
+        },
+        {
+          "title": "Team Number",
+          "description": "The team number of the robot you're scouting.",
+          "type": "select",
+          "required": true,
+          "code": "teamNumber",
+          "formResetBehavior": "reset",
+          "defaultValue": "",
+          "choices": {
+            "321": "321",
+            "449": "449",
+            "526": "526",
+            "611": "611",
+            "686": "686",
+            "1599": "1599",
+            "2106": "2106",
+            "2377": "2377",
+            "2537": "2537",
+            "3504": "3504",
+            "4472": "4472",
+            "4575": "4575",
+            "4821": "4821",
+            "5115": "5115",
+            "5243": "5243",
+            "5338": "5338",
+            "5549": "5549",
+            "5587": "5587",
+            "8230": "8230",
+            "8726": "8726",
+            "9033": "9033",
+            "449b": "449b",
+            "2537b": "2537b",
+            "4472b": "4472b",
+            "5243b": "5243b",
+            "5338b": "5338b"
+          }
+        },
+        {
+          "title": "Carrots in Pantry",
+          "description": "How many carrots were scored in the pantry",
+          "type": "counter",
+          "required": false,
+          "code": "autoPantry",
+          "formResetBehavior": "reset",
+          "defaultValue": 0,
+          "min": 0,
+          "step": 1
+        },
+        {
+          "title": "Carrots in Oven",
+          "description": "How many carrots were scored in the oven",
+          "type": "counter",
+          "required": false,
+          "code": "autoOven",
+          "formResetBehavior": "reset",
+          "defaultValue": 0,
+          "min": 0,
+          "step": 1
+        }
+      ]
+    },
+    {
+      "name": "Tele-op Carrots",
+      "fields": [
+        {
+          "title": "L1 Carrots",
+          "description": "How many carrots were in L1",
+          "type": "counter",
+          "required": false,
+          "code": "L1C",
+          "formResetBehavior": "reset",
+          "defaultValue": 0,
+          "min": 0,
+          "step": 1
+        },
+        {
+          "title": "L2 Carrots",
+          "description": "How many carrots were in L2",
+          "type": "counter",
+          "required": false,
+          "code": "L2C",
+          "formResetBehavior": "reset",
+          "defaultValue": 0,
+          "min": 0,
+          "step": 1
+        },
+        {
+          "title": "L3 Carrots",
+          "description": "How many carrots were in L3",
+          "type": "counter",
+          "required": false,
+          "code": "L3C",
+          "formResetBehavior": "reset",
+          "defaultValue": 0,
+          "min": 0,
+          "step": 1
+        },
+        {
+          "title": "Carrots In Oven",
+          "description": "How many carrots were scored in the oven",
+          "type": "counter",
+          "required": false,
+          "code": "CO",
+          "formResetBehavior": "reset",
+          "defaultValue": 0,
+          "min": 0,
+          "step": 1
+        }
+      ]
+    },
+    {
+      "name": "Tele-op Carrot Cakes",
+      "fields": [
+        {
+          "title": "L1 Cakes",
+          "description": "How many carrot cakes were in L1",
+          "type": "counter",
+          "required": false,
+          "code": "L1CC",
+          "formResetBehavior": "reset",
+          "defaultValue": 0,
+          "min": 0,
+          "step": 1
+        },
+        {
+          "title": "L2 Cakes",
+          "description": "How many carrot cakes were in L2",
+          "type": "counter",
+          "required": false,
+          "code": "L2CC",
+          "formResetBehavior": "reset",
+          "defaultValue": 0,
+          "min": 0,
+          "step": 1
+        },
+        {
+          "title": "L3 Cakes",
+          "description": "How many carrot cakes were in L3",
+          "type": "counter",
+          "required": false,
+          "code": "L3CC",
+          "formResetBehavior": "reset",
+          "defaultValue": 0,
+          "min": 0,
+          "step": 1
+        },
+        {
+          "title": "Cakes In Oven",
+          "description": "How many carrot cakes were scored in the oven",
+          "type": "counter",
+          "required": false,
+          "code": "CCO",
+          "formResetBehavior": "reset",
+          "defaultValue": 0,
+          "min": 0,
+          "step": 1
+        }
+      ]
+    },
+    {
+      "name": "Intake",
+      "fields": [
+        {
+          "title": "Kitchen",
+          "description": "How many carrots were intaken from the kitchen",
+          "type": "counter",
+          "required": false,
+          "code": "IK",
+          "formResetBehavior": "reset",
+          "defaultValue": 0,
+          "min": 0,
+          "step": 1
+        },
+        {
+          "title": "Neutral Zone",
+          "description": "How many carrots were intaken from the neutral zone",
+          "type": "counter",
+          "required": false,
+          "code": "INZ",
+          "formResetBehavior": "reset",
+          "defaultValue": 0,
+          "min": 0,
+          "step": 1
+        },
+        {
+          "title": "Source",
+          "description": "How many carrots were intaken from the source",
+          "type": "counter",
+          "required": false,
+          "code": "IS",
+          "formResetBehavior": "reset",
+          "defaultValue": 0,
+          "min": 0,
+          "step": 1
+        }
+      ]
+    },
+    {
+      "name": "Postmatch",
+      "fields": [
+        {
+          "title": "Defensive Strategy",
+          "description": "Strategy the robot played during defense.",
+          "type": "multi-select",
+          "required": false,
+          "code": "defenseStrat",
+          "formResetBehavior": "reset",
+          "defaultValue": [
+            "4"
+          ],
+          "choices": {
+            "1": "Thief",
+            "2": "Defense (OZ)",
+            "3": "Defense (NZ)",
+            "4": "Did Not Play Defense"
+          }
+        },
+        {
+          "title": "Driver Rating",
+          "description": "How well did the driver perform.",
+          "type": "range",
+          "required": false,
+          "code": "driverRating",
+          "formResetBehavior": "reset",
+          "defaultValue": 1,
+          "min": 1,
+          "max": 5,
+          "step": 1
+        },
+        {
+          "title": "Problems?",
+          "description": "Please indicate whether the robot died,  did not show up, browned out, A-stopped(stopped workinng during auto), or E-stopped(stopped working for the entire game).",
+          "type": "multi-select",
+          "required": false,
+          "code": "died",
+          "formResetBehavior": "reset",
+          "choices": {
+            "1": "Died",
+            "2": "No Show",
+            "3": "Browned Out",
+            "4": "A-Stop",
+            "5": "E-Stop",
+            "6": "Parts Fell Off"
+          }
+        },
+        {
+          "title": "Yellow/Red Card",
+          "type": "select",
+          "required": true,
+          "code": "card",
+          "formResetBehavior": "reset",
+          "defaultValue": "No Card",
+          "choices": {
+            "No Card": "No Card",
+            "Yellow": "Yellow Card",
+            "Red": "Red Card"
+          }
+        },
+        {
+          "title": "Comments",
+          "type": "text",
+          "required": false,
+          "code": "comments",
+          "formResetBehavior": "reset",
+          "defaultValue": "",
+          "min": 0,
+          "max": 10000
+        }
+      ]
+    }
+  ]
+}
