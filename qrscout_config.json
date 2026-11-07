@@ -346,17 +346,26 @@
           }
         },
         {
-          "title": "Yellow/Red Card",
-          "type": "select",
-          "required": true,
-          "code": "card",
+          "title": "Carrots Held While Parked",
+          "description": "How many carrots were held in the robot when it parked",
+          "type": "counter",
+          "required": false,
+          "code": "park_carrots",
           "formResetBehavior": "reset",
-          "defaultValue": "No Card",
-          "choices": {
-            "No Card": "No Card",
-            "Yellow": "Yellow Card",
-            "Red": "Red Card"
-          }
+          "defaultValue": 0,
+          "min": 0,
+          "step": 1
+        },
+        {
+          "title": "Cakes Held While Parked",
+          "description": "How many carrot cakes were held in the robot when it parked",
+          "type": "counter",
+          "required": false,
+          "code": "park_cakes",
+          "formResetBehavior": "reset",
+          "defaultValue": 0,
+          "min": 0,
+          "step": 1
         },
         {
           "title": "Comments",
