@@ -14,9 +14,12 @@ defensive_strategy <- sample(c("No Defense", "Thief", "OZ", "NZ"), 120, TRUE, c(
 scouter_initials <- sample(c("NS", "HG", "LM", "CH"), 120, TRUE)
 match_number <- c(rep(1:20, each = 6))
 robot <- sample(c("Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"), 120, TRUE)
-team_number <- sample(c(449, 499, 444, 494, 949, 999, 944, 994), 120, TRUE)
+team_number <- sample(c(449, 3247, 5642, 214, 7483, 1424, 5432, 3531,1353,1), 120, TRUE)
 parked_carrots <- sample(0:3, 120, TRUE, c(3, 2, 4, 5))
 parked_cakes <- sample(0:3, 120, TRUE, c(5, 2, 1, 1))
+kitchen_intake <- sample(0:10, 120, TRUE)
+neutral_intake <- sample(0:10, 120, TRUE)
+source_intake <- sample(0:10, 120, TRUE)
 df <- data.frame(
     cbind(
         match_number,
@@ -35,6 +38,9 @@ df <- data.frame(
         defensive_strategy,
         scouter_initials,
         parked_carrots,
-        parked_cakes
+        parked_cakes,
+        kitchen_intake,
+        neutral_intake,
+        source_intake
     )
 )
