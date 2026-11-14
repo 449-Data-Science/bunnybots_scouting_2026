@@ -8,6 +8,8 @@ team = team[-seq(length(team) - (ceiling(n/length(teams_list))*length(teams_list
 match = floor(seq(from=6,to=n+5)/6)
 robot = rep(c("R1", "R2", "R3", "B1", "B2", "B3"), n/6)
 
+taxi <- sample(0:1, n, TRUE, c(2,8))
+park <- sample(0:1, n, TRUE, c(2,8))
 auto_pantry <- sample(0:3, n, TRUE, c(30, 5, 50, 10))
 auto_oven <- sample(0:3, n, TRUE, c(50, 10, 20, 10))
 tele_carrots_l1 <- sample(0:5, n, TRUE, c(25, 30, 20, 20, 10, 5))
@@ -21,7 +23,7 @@ tele_cakes_oven <- sample(0:75, n, TRUE)
 driver_rating <- sample(0:5, n, TRUE)
 problems <- sample(c("No Problems", "Died", "No Show", "Browned out", "A-Stop", "E-Stop", "Parts Fell Off"), n, TRUE, c(6, 2, 2, 2, 2, 2, 2))
 defensive_strategy <- sample(c("No Defense", "Thief", "OZ", "NZ"), n, TRUE, c(6,2,2,2))
-scouter_initials <- sample(c("NS", "HG", "LM", "CH"), n, TRUE)
+scouter_initials <- sample(c("NS", "HG", "LM", "CH"), n, TRUE, c(0.1,0.2,0.2,0.5))
 match_number <- c(rep(1:20, each = 6))
 robot <- sample(c("Red 1", "Red 2", "Red 3", "Blue 1", "Blue 2", "Blue 3"), n, TRUE)
 team_number <- sample(c(449, 3247, 5642, 214, 7483, 1424, 5432, 3531,1353,1), n, TRUE)
@@ -31,10 +33,10 @@ kitchen_intake <- sample(0:10, n, TRUE)
 neutral_intake <- sample(0:10, n, TRUE)
 source_intake <- sample(0:10, n, TRUE)
 df <- data.frame(
-    cbind(
         match,
         team,
         robot,
+        taxi,
         auto_pantry,
         auto_oven,
         tele_carrots_l1,
@@ -44,13 +46,14 @@ df <- data.frame(
         tele_cakes_l2,
         tele_cakes_l3,
         tele_carrots_oven,
+        tele_cakes_oven,
         driver_rating, problems,
         defensive_strategy,
         scouter_initials,
+        park,
         parked_carrots,
         parked_cakes,
         kitchen_intake,
         neutral_intake,
         source_intake
-    )
 )
