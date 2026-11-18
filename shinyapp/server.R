@@ -1,28 +1,28 @@
-#
-# This is the server logic of a Shiny web application. You can run the
-# application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    https://shiny.posit.co/
-#
 
-library(shiny)
 
 # Define server logic required to draw a histogram
 function(input, output, session) {
-
-    output$distPlot <- renderPlot({
-
-        # generate bins based on input$bins from ui.R
-        x    <- faithful[, 2]
-        bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-        # draw the histogram with the specified number of bins
-        hist(x, breaks = bins, col = 'darkgray', border = 'white',
-             xlab = 'Waiting time to next eruption (in mins)',
-             main = 'Histogram of waiting times')
-
+    observe({
+        teams = sort(unique(raw$team))
+        updateVirtualSelect("team_selected", choices = teams)
     })
-
+    
+    output$carrots <- renderPlot({
+        individual_carrots_graph(team_selected = input$team_selected)
+    })
+    output$cakes <- renderPlot({
+        individual_cakes_graph(team_selected = input$team_selected)
+    })
+    output$intake <- renderPlot({
+        individual_intake_graph(team_selected = input$team_selected)
+    })
+    output$driver_rating <- renderPlot({
+        individual_driver_rating_graph(team_selected = input$team_selected)
+    })
+    output$tot_score <- renderPlot({
+        total_score()
+    })
+    output$scout_times <- renderPlot({
+        scouting_times_graph()
+    })
 }
